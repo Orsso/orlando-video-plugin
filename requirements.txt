@@ -1,0 +1,3 @@
+opencv-python>=4.8.0
+Pillow>=8.0.0
+python-vlc

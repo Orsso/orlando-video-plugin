@@ -1,0 +1,64 @@
+{
+  "name": "video-library",
+  "version": "1.0.0",
+  "display_name": "Video Library",
+  "description": "Convert video files to DITA topics with in-app preview",
+  "orlando_version": ">=2.0.0",
+  "plugin_api_version": "1.0",
+  "category": "pipeline",
+  "entry_point": "video_plugin.plugin.VideoConverterPlugin",
+  
+  "supported_formats": [
+    {
+      "extension": ".mp4",
+      "mime_type": "video/mp4",
+      "description": "MP4 Video File"
+    },
+    {
+      "extension": ".avi",
+      "mime_type": "video/x-msvideo",
+      "description": "AVI Video File"
+    },
+    {
+      "extension": ".mov",
+      "mime_type": "video/quicktime",
+      "description": "QuickTime Video File"
+    },
+    {
+      "extension": ".wmv",
+      "mime_type": "video/x-ms-wmv",
+      "description": "Windows Media Video File"
+    },
+    {
+      "extension": ".webm",
+      "mime_type": "video/webm",
+      "description": "WebM Video File"
+    },
+    {
+      "extension": ".mkv",
+      "mime_type": "video/x-matroska",
+      "description": "Matroska Video File"
+    }
+  ],
+  
+  "dependencies": {
+    "python": ">=3.8",
+    "packages": [
+      "opencv-python>=4.8.0",
+      "Pillow>=8.0.0"
+    ]
+  },
+  
+  "provides": {
+    "services": ["DocumentHandler"],
+    "ui_extensions": ["VideoPreviewPanel"]
+  },
+  
+  "ui": {
+    "splash_button": {
+      "text": "Import from\nVideo",
+      "icon": "plugin-icon.png",
+      "tooltip": "Convert video files to DITA with inline preview"
+    }
+  }
+}
