@@ -46,16 +46,16 @@ class VideoConverterPlugin(BasePlugin, UIExtension):
             self.log_warning(f"Failed to load plugin configuration: {e}")
             # Continue with default configuration
         
-    # Provide default configuration by loading our bundled defaults
+    # Provide default configuration by loading our config.yml
     def _get_default_config(self) -> Dict[str, Any]:
         try:
             import yaml
-            default_path = Path(self.plugin_dir) / 'config' / 'default_config.yml'
-            if default_path.exists():
-                with open(default_path, 'r', encoding='utf-8') as f:
+            config_path = Path(self.plugin_dir) / 'config.yml'
+            if config_path.exists():
+                with open(config_path, 'r', encoding='utf-8') as f:
                     return yaml.safe_load(f) or {}
         except Exception as e:
-            self.log_warning(f"Using empty default config (error reading defaults): {e}")
+            self.log_warning(f"Using empty default config (error reading config.yml): {e}")
         return {}
         
     def get_name(self) -> str:

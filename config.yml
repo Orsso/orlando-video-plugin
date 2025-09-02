@@ -1,1 +1,24 @@
-{}
+# Orlando Video Plugin Configuration
+
+video_processing:
+  # File format support
+  supported_formats: ["mp4", "avi", "mov", "wmv", "webm", "mkv"]
+  max_file_size_mb: 500  # Reasonable limit for documentation videos
+  
+thumbnail_generation:
+  # Poster generation
+  poster_time_percentage: 10  # Poster at 10% of duration
+  poster_resolution: "320x180"
+  poster_quality: 85  # JPEG quality
+
+dita_integration:
+  # Topic structure - keep it simple
+  default_topic_type: "concept"
+  include_metadata_table: true
+  preserve_original_filenames: true
+
+ui_settings:
+  # Structure tab integration
+  video_preview_panel:
+    show_by_default: true  # Show when topic contains videos
+    default_height: 300

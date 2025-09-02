@@ -2,10 +2,14 @@
   "name": "video-library",
   "version": "1.0.0",
   "display_name": "Video Library",
-  "description": "Convert video files to DITA topics with in-app preview",
-  "orlando_version": ">=2.0.0",
+  "description": "Convert video files to DITA topics",
+  "author": "Orsso",
+  "homepage": "https://github.com/orsso/orlando-video-plugin",
+
+  "orlando_version": ">=1.2.0",
   "plugin_api_version": "1.0",
   "category": "pipeline",
+  
   "entry_point": "video_plugin.plugin.VideoConverterPlugin",
   
   "supported_formats": [
@@ -45,7 +49,8 @@
     "python": ">=3.8",
     "packages": [
       "opencv-python>=4.8.0",
-      "Pillow>=8.0.0"
+      "Pillow>=8.0.0",
+      "python-vlc"
     ]
   },
   
