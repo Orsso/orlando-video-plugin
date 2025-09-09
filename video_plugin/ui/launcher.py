@@ -229,7 +229,7 @@ class VideoWorkflowLauncher:
         combined.metadata['doctype_map'] = '<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "./dtd/technicalContent/dtd/map.dtd">'
         combined.metadata['doctype_concept'] = '<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA 1.3 Concept//EN" "../dtd/technicalContent/dtd/concept.dtd">'
 
-        # Create a root ditamap
+        # Create a root ditamap (core save enforces title/metadata globally)
         map_el = ET.Element("map")
         try:
             map_el.set('xml:lang', 'en-US')
@@ -243,20 +243,7 @@ class VideoWorkflowLauncher:
             t = re.sub(r"[^A-Za-z0-9]+", "-", t)
             t = re.sub(r"-{2,}", "-", t).strip("-")
             return t.upper() or "VIDEO-LIBRARY"
-        try:
-            topicmeta = ET.SubElement(map_el, "topicmeta")
-            manual_title = combined.metadata.get("manual_title") or "VIDEO-LIBRARY"
-            other = ET.SubElement(topicmeta, "othermeta")
-            other.set("name", "manual_reference")
-            other.set("content", _norm_manual_ref(manual_title))
-            crit = ET.SubElement(topicmeta, "critdates")
-            created = ET.SubElement(crit, "created")
-            today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-            created.set("date", today)
-            revised = ET.SubElement(crit, "revised")
-            revised.set("modified", combined.metadata.get("revision_date") or today)
-        except Exception:
-            pass
+        # Map-level topicmeta (manual_reference/manualCode/critdates) now enforced in core save
 
         # Build a folder node cache: rel_dir (str) -> topichead element
         folder_nodes: Dict[str, ET.Element] = {}

@@ -177,14 +177,36 @@ class VideoPreviewPanel(ttk.Frame):
             vids = []
             if self._topic is not None:
                 # Collect both legacy <video> and new <object> forms
+                used_xpath = False
                 try:
                     vids.extend(self._topic.xpath('.//video'))
-                except Exception:
-                    pass
-                try:
                     vids.extend(self._topic.xpath('.//object[contains(@outputclass, "video")]'))
+                    used_xpath = True
                 except Exception:
+                    # Fallback for stdlib xml.etree without XPath support
                     pass
+                if not used_xpath:
+                    try:
+                        for el in list(self._topic.iter()) if hasattr(self._topic, 'iter') else []:
+                            try:
+                                tag = getattr(el, 'tag', '')
+                                if not isinstance(tag, str):
+                                    continue
+                                t = tag.lower()
+                                if t == 'video':
+                                    vids.append(el)
+                                elif t == 'object':
+                                    oc = ''
+                                    try:
+                                        oc = str(el.get('outputclass') or '')
+                                    except Exception:
+                                        oc = ''
+                                    if 'video' in oc.lower():
+                                        vids.append(el)
+                            except Exception:
+                                continue
+                    except Exception:
+                        pass
         except Exception:
             vids = []
 
