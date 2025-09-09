@@ -43,6 +43,6 @@ Videos/
 
 ## Requirements
 
-- [Orlando Toolkit](https://github.com/orsso/orlando-toolkit) 1.2.0+
+- [Orlando Toolkit](https://github.com/orsso/orlando-toolkit) 1.2.2+
 - Python 3.8+
 - VLC media player (optional, for preview)
